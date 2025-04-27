@@ -1,12 +1,17 @@
-import Navbar from './assets/Navbar';
-import Hero from './assets/Hero';
+import Navbar from './components/Navbar';
+import Hero from './components/Hero';
 
 function App() {
-  const [count, setCount] = useState(0)
+ // const [count, setCount] = useState(0)
 
   return (
     <>
-      <div>
+    <div className="flex flex-col">
+    <div className="flex gap-4">
+      <div className="w-10 h-10 bg-red-500"></div>
+      <div className="w-10 h-10 bg-blue-500"></div>
+    </div>
+
       <Navbar />
       <Hero />
     </div>

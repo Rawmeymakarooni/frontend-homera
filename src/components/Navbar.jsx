@@ -3,14 +3,14 @@ import { FiSearch } from 'react-icons/fi';
 
 function Navbar() {
   return (
-    <nav className="flex items-center justify-between px-8 py-4 bg-[#8C6D5A] text-white">
+    <nav className="flex items-center justify-between px-8 py-4 bg-[#8C6D5A] text-white w-full">
       {/* Logo */}
       <div className="font-bold text-xl">
         <span className="bg-white text-[#8C6D5A] px-2 py-1 rounded-sm">HOMÉRA</span>
       </div>
 
       {/* Menu */}
-      <ul className="flex gap-8 text-sm font-medium">
+      <ul className="flex items-center list-none space-x-8 text-sm font-medium">
         <li>Home</li>
         <li>About Us</li>
         <li>Explore</li>

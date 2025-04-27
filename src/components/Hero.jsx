@@ -2,7 +2,7 @@ function Hero() {
     return (
       <section className="flex h-[90vh]">
         {/* Left image */}
-        <div className="w-1/2 bg-cover bg-center" style={{ backgroundImage: "url('/your-image-path.jpg')" }}>
+        <div className="w-1/2 bg-cover bg-center" style={{ backgroundImage: "url('https://i.pinimg.com/736x/ff/cf/3f/ffcf3f2aafaa21c33652ac3bc9186501.jpg')" }}>
         </div>
   
         {/* Right content */}
