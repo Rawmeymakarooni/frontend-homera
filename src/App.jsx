@@ -1,5 +1,10 @@
+
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
+import React, { useState } from 'react';
+import './index.css';
+import './App.css'; 
+5aea69d433c1060d87b5d3962c86c912c2ad34bb
 
 function App() {
  // const [count, setCount] = useState(0)
