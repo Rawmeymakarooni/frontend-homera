@@ -10,23 +10,23 @@ function Navbar() {
       </div>
 
       {/* Menu */}
-      <ul className="flex items-center list-none space-x-8 text-sm font-medium">
-        <li>Home</li>
-        <li>About Us</li>
-        <li>Explore</li>
-        <li>Designer</li>
-        <li>Blogs</li>
+      <ul className="flex ml-10 space-x-13 list-none text-sm text-brown-800">
+        <li className="hover:underline">Home</li>
+        <li className="hover:underline">About Us</li>
+        <li className="hover:underline">Explore</li>
+        <li className="hover:underline">Designer</li>
+        <li className="hover:underline">Blogs</li>
       </ul>
 
       {/* Search & Profile */}
-      <div className="flex items-center gap-4">
-        <div className="flex items-center border border-white rounded-full px-3 py-1">
+      <div className="flex items-center ml-60 space-x-4 gap-6">
+        <div className="flex border border-white rounded-full px-1 py-1">
           <input
             type="text"
             placeholder="Search..."
             className="bg-transparent outline-none text-white placeholder-white text-sm"
           />
-          <FiSearch className="ml-2" />
+          <FiSearch className="w-5 h-5" />
         </div>
         <FaUser />
       </div>
