@@ -1,9 +1,9 @@
-
+import Footer from './components/footer';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
-import React, { useState } from 'react';
-import './index.css';
-import './App.css'; 
+//import React, { useState } from 'react';
+//import './index.css';
+//import './App.css'; 
 
 
 function App() {
@@ -11,15 +11,16 @@ function App() {
 
   return (
     <>
-    <div className="flex flex-col">
-    <div className="flex gap-4">
-    </div>
-
-      <Navbar />
-      <Hero />
-    </div>
+      <div>
+        <Navbar />
+        <main className="pt-16 px-8 bg-[#8C6D5A]">
+          <Hero />
+        </main>
+        
+        <Footer />
+      </div>
     </>
-  )
+  );
 }
 
 export default App;
