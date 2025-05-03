@@ -41,7 +41,7 @@ function Navbar() {
         </li>
         <li className="flex item-center gap-3">
         <i className="ri-book-read-line text-3xl md:hidden block"></i>
-          <a href="#">Blogs</a>
+          <a href="#blogs">Blogs</a>
         </li>
       </ul>
 
