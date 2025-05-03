@@ -15,16 +15,17 @@ function Footer() {
   };
   
   return (
-    <footer className="bg-[#c4B29a] px-24 py-12 text-sm text-white-700 grid grid-cols-4 gap-10">
+    <>
+    <footer className="bg-[#C4B29A] px-16 py-10 text-sm text-[#5A4B38] grid grid-cols-4 gap-6">
       <div>
-        <h4 className="font-bold text-lg text-[#573c22]">HOMÉRA</h4>
+        <h4 className="font-bold text-lg text-[#5A4B38]">HOMÉRA</h4>
         <p className="mt-2">Homera is a platform to discover interior design inspirations and collaborate with top designers.</p>
         <p className="mt-2">📞 0857 7926 7830</p>
         <p>✉️ homera@houseinterior.com</p>
       </div>
       <div>
-        <h4 className="font-bold text-[#573c22]">MENU</h4>
-        <ul className="mt-2 space-y-1 text-white">
+        <h4 className="font-bold text-[#5A4B38]">MENU</h4>
+        <ul className="mt-2 space-y-1 text-[#5A4B38]">
           <li>Home</li>
           <li>About Us</li>
           <li>Explore</li>
@@ -33,33 +34,40 @@ function Footer() {
         </ul>
       </div>
       <div>
-        <h4 className="font-bold text-[#573c22]">FOLLOW US</h4>
-        <div className="flex space-x-3 mt-2">
-        <i class="ri-instagram-line text-2xl"></i>
-        <i class="ri-youtube-line text-2xl"></i>
-        <i class="ri-twitter-x-line text-2xl"></i>
-        <i class="ri-linkedin-fill text-2xl"></i>
+        <h4 className="font-bold text-[#5A4B38]">FOLLOW US</h4>
+        <div className="flex space-x-2 mt-2">
+        <i class="ri-instagram-line text-3xl"></i>
+        <i class="ri-youtube-line text-3xl"></i>
+        <i class="ri-twitter-x-line text-3xl"></i>
+        <i class="ri-linkedin-fill text-3xl"></i>
         </div>
       </div>
       <div>
-        <h4 className="font-bold text-[#573c22]">STAY CONNECTED</h4>
+        <h4 className="font-bold text-[#5A4B38]">STAY CONNECTED</h4>
         <div className="flex mt-2">
         <input
           type="email"
           placeholder="Your email"
-          className="rounded-l-full border border-gray-300 px-2 py-1"
+          className="rounded-full border border-[#5A4B38] px-6 py-1 text-[#5A4B38] outline-none mr-6"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
         <button
           onClick={handleSend}
-          className="bg-[#b4906b] text-white px-4 rounded-r-full"
+          className="bg-[#5A4B38] text-white px-4 py-2 rounded-full focus:outline-none focus:ring-0 active:bg-[#4a3c2d]"
         >
           Send
         </button>
         </div>
       </div>
     </footer>
+
+     {/* bagian credit */}
+     <div className="bg-[#5A4B38] text-white text-center py-2 text-sm">
+      <i className="ri-copyright-line mr-1"></i>
+      2025 HOMÉRA. All rights reserved.
+    </div>
+    </>
   );
 }
 

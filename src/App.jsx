@@ -13,7 +13,7 @@ function App() {
     <>
       <div>
         <Navbar />
-        <main className="pt-16 px-8 bg-[#8C6D5A]">
+        <main className="pt-16 px-0 bg-[#8C6D5A]">
           <Hero />
         </main>
         
