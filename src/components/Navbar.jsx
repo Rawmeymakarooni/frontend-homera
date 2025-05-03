@@ -1,6 +1,7 @@
 import { FaUser } from 'react-icons/fa';
 import { FiSearch } from 'react-icons/fi';
 import { useState } from "react";
+import { Link } from 'react-router-dom';
 
 function Navbar() {
   const[show, setShow] = useState(false);
@@ -22,26 +23,26 @@ function Navbar() {
 
 
       {/* Menu */}
-      <ul className={`flex lg:gap-10 md:static md:flex-row md:shadow-none md:bg-transparent md:w-auto md:h-full md:translate-y-0 md:p-0 md:m-0 md:transition-nonegap-8 fixed ${menuActive} top-1/2 -translate-y-1/2 flex-col px-8 py-6 rounded shadow-lg shadow-slate-300 bg-amber-950 font-bold mr-15 list-none text-sm text-white transition-all`}>
+      <ul className={`flex lg:gap-10 md:static md:flex-row md:shadow-none md:bg-transparent md:w-auto md:h-full md:translate-y-0 md:p-0 md:m-0 md:transition-none gap-8 fixed ${menuActive} top-1/2 -translate-y-1/2 flex-col px-8 py-6 rounded shadow-lg shadow-slate-300 bg-amber-950 font-bold mr-15 list-none text-sm text-white transition-all`}>
         <li className="flex item-center gap-2">
           <i className="ri-home-5-line text-3xl md:hidden block"></i>
-          <a  href="#">Home</a>
+          <Link to="/Home">Home</Link>
         </li>
         <li className="flex item-center gap-3">
           <i className="ri-information-line text-3xl md:hidden block"></i>
-          <a href="#">About Us</a>
+          <Link to="/">About Us</Link>
         </li>
         <li className="flex item-center gap-3">
           <i className="ri-compass-3-line text-3xl md:hidden block"></i>
-          <a href="#">Explore</a>
+          <Link to="/Explore">Explore</Link>
         </li>
         <li className="flex item-center gap-3">
           <i className="ri-team-line text-3xl md:hidden block"></i>
-          <a href="#">Designer</a>
+          <Link to="/Designer">Designer</Link>
         </li>
         <li className="flex item-center gap-3">
         <i className="ri-book-read-line text-3xl md:hidden block"></i>
-          <a href="#blogs">Blogs</a>
+          <Link to="/blogs">Blogs</Link>
         </li>
       </ul>
 

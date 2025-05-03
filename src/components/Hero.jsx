@@ -19,7 +19,7 @@ function Hero() {
   return (
     <>
       {/* HERO SECTION */}
-      <section id="blogs" className="flex w-full h-screen">
+      <section className="flex w-full h-screen">
         {/* Left image */}
         <div
           className="w-1/2 h-full bg-cover bg-center"
