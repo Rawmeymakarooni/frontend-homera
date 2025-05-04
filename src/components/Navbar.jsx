@@ -29,11 +29,7 @@ function Navbar() {
         </li>
         <li className="flex item-center gap-3">
           <i className="ri-information-line text-3xl md:hidden block"></i>
-<<<<<<< HEAD
-          <Link to="/about-us">About Us</Link> {/* Navigasi ke About Us */}
-=======
-          <Link to="/">About Us</Link>
->>>>>>> c1a98235fabad6697b3202a654bf09b165fdf71d
+          <Link to="/About-us">About Us</Link>
         </li>
         <li className="flex item-center gap-3">
           <i className="ri-compass-3-line text-3xl md:hidden block"></i>
