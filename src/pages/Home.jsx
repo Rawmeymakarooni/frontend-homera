@@ -28,6 +28,10 @@ function Home() {
             <div className="ml-[18px] text-white">
               <div>INTERIOR</div>
               <div>HOME</div>
+              <p className="text-lg mt-4 text-white">Find the best interior design inspiration and connect directly
+              with profesional designers. Homera is the place for creative ideas and
+              collaboration in interior design.
+              </p>
             </div>
           </div>
 
