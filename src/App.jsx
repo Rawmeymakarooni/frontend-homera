@@ -17,6 +17,7 @@ function App() {
             <Route path="/About-us" element={<AboutUs />} />  {/* Halaman About Us */}
             <Route path="/Explore" element={<Explore />} />
             <Route path="/Designer" element={<Designer />} />
+            <Route path="/Home" element={<Home />} />
             {/* Tambahkan route lain sesuai kebutuhan */}
           </Routes>
         </main>
