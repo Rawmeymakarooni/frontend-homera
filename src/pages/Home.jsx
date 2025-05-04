@@ -4,10 +4,10 @@ function Home() {
   return (
     <>
       {/* Section 1: Hero */}
-      <section className="relative flex h-[90vh] overflow-hidden font-serif">
+      <section className="flex w-full h-screen">
         {/* Left image */}
         <div
-          className="w-1/2 bg-cover bg-center"
+          className="w-1/2 h-full bg-cover bg-center"
           style={{
             backgroundImage:
               "url('https://i.pinimg.com/736x/ff/cf/3f/ffcf3f2aafaa21c33652ac3bc9186501.jpg')",

@@ -1,14 +1,24 @@
-import articles from '@/data/articles';
-import Footer from '@/components/Footer';
-import Navbar from '@/components/Navbar';
-
 function Blogs() {
-  return (
-    <div className="font-serif">
-      <Navbar />
+  const articles = [
+    {
+      id: 1,
+      title: "Cara Menata Ruang Tamu Minimalis",
+      imageUrl: "/images/article1.jpg",
+      content: "Ruang tamu minimalis cocok untuk rumah modern...",
+      publishedAt: "2025-05-01"
+    },
+    {
+      id: 2,
+      title: "Inspirasi Dapur Estetik",
+      imageUrl: "/images/article2.jpg",
+      content: "Dapur dengan warna earth tone sangat populer...",
+      publishedAt: "2025-05-01"
+    },
+  ];
 
-      {/* HERO SECTION (Ditambahkan untuk Blogs) */}
-      <section className="flex w-full h-[60vh]">
+  return (
+    <>
+      <section className="flex w-full h-screen">
         {/* Left image */}
         <div
           className="w-1/2 h-full bg-cover bg-center"
@@ -19,13 +29,23 @@ function Blogs() {
         ></div>
 
         {/* Right content */}
-        <div className="w-1/2 h-full bg-[#8B7357] flex flex-col justify-center items-start px-12 text-white">
-          <h1 className="text-6xl font-serif mb-8">HOMÉRA</h1>
-          <div className="bg-[#5A4B38] p-6">
-            <h2 className="text-2xl font-semibold">BLOGS</h2>
-            <p className="mt-2 text-sm">
-              We Create Elegant, Simple and Luxury Interior Design
-            </p>
+        <div className="w-1/2 bg-[#8B7357] flex flex-col justify-center px-7 text-white relative z-10">
+          {/* Title */}
+          <div className="flex items-center text-9xl font-serif mb-8">
+            <span
+              className="text-[#36271C] absolute left-0 ml-[-270px] z-20"
+              style={{ backgroundColor: "transparent" }}
+            >
+              HOM
+            </span>
+            <span className="ml-[18px] text-white">ÉRA</span>
+          </div>
+          <div className="relative left-[-100px] w-[500px] max-w-full">
+            <div className="absolute inset-0 translate-x-3 translate-y-3 bg-[#C4B29A] rounded-sm z-0"></div>
+            <div className="relative z-10 bg-[#5A4B38] p-5 rounded-sm flex flex-col items-center text-center">
+              <h2 className="text-4xl font-jost">BLOGS</h2>
+              <p className="mt-2 text-1x1">We Create Elegant, Simple, and Luxury Interior Design</p>
+            </div>
           </div>
         </div>
       </section>
@@ -59,9 +79,7 @@ function Blogs() {
           ))}
         </div>
       </section>
-
-      <Footer />
-    </div>
+    </>
   );
 }
 
