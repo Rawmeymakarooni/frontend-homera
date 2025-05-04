@@ -1,5 +1,3 @@
-import { FaCheckCircle } from 'react-icons/fa';
-
 function AboutUs() {
   return (
     <>

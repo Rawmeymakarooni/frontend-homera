@@ -1,5 +1,3 @@
-import { FaCheckCircle } from 'react-icons/fa';
-
 function Home() {
   return (
     <>
@@ -30,8 +28,6 @@ function Home() {
               <div>HOME</div>
             </div>
           </div>
-
-
         </div>
       </section>
     </>

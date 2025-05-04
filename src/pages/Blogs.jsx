@@ -1,14 +1,30 @@
-import articles from '@/data/articles';
-import Footer from '@/components/Footer';
-import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer'; 
+import Navbar from './Navbar';
 
 function Blogs() {
+  const articles = [
+    {
+      id: 1,
+      title: "Cara Menata Ruang Tamu Minimalis",
+      imageUrl: "/images/article1.jpg",
+      content: "Ruang tamu minimalis cocok untuk rumah modern...",
+      publishedAt: "2025-05-01"
+    },
+    {
+      id: 2,
+      title: "Inspirasi Dapur Estetik",
+      imageUrl: "/images/article2.jpg",
+      content: "Dapur dengan warna earth tone sangat populer...",
+      publishedAt: "2025-05-01"
+    },
+  ];
+
   return (
     <div className="font-serif">
       <Navbar />
 
-      {/* HERO SECTION (Ditambahkan untuk Blogs) */}
-      <section className="flex w-full h-[60vh]">
+      {/* HERO SECTION */}
+      <section className="flex w-full h-screen">
         {/* Left image */}
         <div
           className="w-1/2 h-full bg-cover bg-center"
