@@ -1,15 +1,26 @@
+<<<<<<< HEAD
+=======
+import Footer from '@/components/Footer'; 
+import Navbar from './Navbar';
+
+>>>>>>> b89fb0d (Save local changes before pulling)
 function Blogs() {
   const articles = [
     {
       id: 1,
       title: "Cara Menata Ruang Tamu Minimalis",
+<<<<<<< HEAD
       imageUrl: "/public/blog3.png",
+=======
+      imageUrl: "/images/article1.jpg",
+>>>>>>> b89fb0d (Save local changes before pulling)
       content: "Ruang tamu minimalis cocok untuk rumah modern...",
       publishedAt: "2025-05-01"
     },
     {
       id: 2,
       title: "Inspirasi Dapur Estetik",
+<<<<<<< HEAD
       imageUrl: "/public/blog2.png",
       content: "Dapur dengan warna earth tone sangat populer...",
       publishedAt: "2025-05-01"
@@ -18,13 +29,25 @@ function Blogs() {
       id: 3,
       title: "Inspirasi Dapur Estetik",
       imageUrl: "/public/blog1.png",
+=======
+      imageUrl: "/images/article2.jpg",
+>>>>>>> b89fb0d (Save local changes before pulling)
       content: "Dapur dengan warna earth tone sangat populer...",
       publishedAt: "2025-05-01"
     },
   ];
+<<<<<<< HEAD
 
   return (
     <>
+=======
+
+  return (
+    <div className="font-serif">
+      <Navbar />
+
+      {/* HERO SECTION */}
+>>>>>>> b89fb0d (Save local changes before pulling)
       <section className="flex w-full h-screen">
         {/* Left image */}
         <div

@@ -37,60 +37,6 @@ function Explore() {
           </div>
         </div>
       </section>
-
-      {/* Section 2: Introduction */}
-      <section className="bg-white py-20 px-10 md:px-32 text-[#5A4B38] flex flex-col md:flex-row gap-10">
-        <div className="w-full md:w-1/2">
-          <h2 className="text-3xl font-bold mb-4">
-            Introducing the Best Interior Design Inspiration Platform!
-          </h2>
-        </div>
-
-        <div className="w-full md:w-1/2 space-y-4 text-sm">
-          <p>
-            Homéra adalah platform yang menghadirkan beragam inspirasi desain
-            interior untuk membantu Anda menciptakan hunian yang nyaman,
-            estetis, dan fungsional. Kami menyediakan referensi desain untuk
-            berbagai ruang—mulai dari ruang tamu, kamar tidur, dapur, hingga area
-            outdoor—yang bisa disesuaikan dengan gaya dan kebutuhan Anda.
-          </p>
-          <p>
-            Lebih dari sekadar penyedia inspirasi, Homéra juga menjembatani Anda
-            dengan desainer interior profesional. Melalui fitur konsultasi dan
-            kolaborasi, Anda bisa mewujudkan rumah impian dengan bantuan ahli
-            yang tepat.
-          </p>
-        </div>
-      </section>
-
-      {/* Section 3: Services */}
-      <section className="flex flex-col md:flex-row bg-[#FAF9F6] px-10 md:px-32 py-16 gap-10 items-center">
-        <img
-          src="/desainer.png"
-          alt="About Homera"
-          className="w-full md:w-1/2 rounded-lg shadow-lg"
-        />
-        <div className="w-full md:w-1/2 text-[#5A4B38]">
-          <h3 className="text-4xl font-bold mb-3">Layanan Terbaik Kami</h3>
-          <p className="mb-4">Dari inspirasi menjadi kenyataan</p>
-          <div className="grid grid-cols-3 md:grid-cols-2 gap-8">
-            {[
-              "Inspirasi Desain Interior",
-              "Desainer Profesional",
-              "Portofolio Eksklusif",
-              "Kolaborasi Mudah",
-              "Beragam Gaya",
-            ].map((item, index) => (
-              <div key={index} className="flex items-center gap-3 text-4x1">
-                <div className="flex items-center justify-center bg-[#5A4B38] text-white rounded-full w-8 h-8">
-                  <FaCheckCircle />
-                </div>
-                <p>{item}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
     </>
   );
 }

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { Link } from 'react-router-dom';
 
 function Designer() {
@@ -19,6 +20,9 @@ function Designer() {
         },
       ];
     
+=======
+function AboutUs() {
+>>>>>>> b89fb0d (Save local changes before pulling)
   return (
       <>
             {/* designer SECTION */}
