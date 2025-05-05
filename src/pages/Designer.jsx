@@ -1,4 +1,23 @@
+import { Link } from 'react-router-dom';
+
 function Designer() {
+    const designers = [
+        {
+          id: 1, 
+          name: "Leonardo Pratama",
+          image: "/images/leonardo.jpg",
+        },
+        {
+          id: 2, 
+          name: "Nadira Vera",
+          image: "/images/nadira.jpg",
+        },
+        {
+          id: 3,  
+          name: "Nathan Wirawan",
+          image: "/images/nathan.jpg",
+        },
+      ];
     
   return (
       <>
@@ -32,6 +51,24 @@ function Designer() {
                     <p className="mt-2 text-1x1">Create with Experts-</p>
                     </div>
                 </div>
+                </div>
+            </section>
+
+            <section className="bg-white py-12 px-6">
+                <h2 className="text-2xl font-semibold text-center mb-8 text-black">MEET YOUR DESIGNER</h2>
+                <div className="flex justify-center gap-8 flex-wrap">
+                {designers.map((designer, index) => (
+                    <Link to={`/designer/${designer.id}`}>
+                        <div key={index} className="flex flex-col items-center">
+                            <img
+                                src={designer.image}
+                                alt={designer.name}
+                                className="w-32 h-32 object-cover rounded-full shadow-md hover:shadow-lg transition transform transition duration-300 hover:scale-105 hover:shadow-xl"
+                            />
+                            <p className="mt-3 font-medium text-black">{designer.name}</p>
+                        </div>
+                    </Link>
+                ))}
                 </div>
             </section>
       </>

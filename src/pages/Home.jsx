@@ -84,7 +84,7 @@ function Home() {
       </section>
 
       {/* Section 3: MEET YOUR DESIGNER */}
-      <section className="bg-white-100 py-12 px-6">
+      <section className="bg-white py-12 px-6">
         <h2 className="text-2xl font-semibold text-center mb-8 text-black">MEET YOUR DESIGNER</h2>
         <div className="flex justify-center gap-8 flex-wrap">
           {designers.map((designer, index) => (
@@ -92,7 +92,7 @@ function Home() {
               <img
                 src={designer.image}
                 alt={designer.name}
-                className="w-32 h-32 object-cover rounded-full shadow-md"
+                className="w-32 h-32 object-cover rounded-full shadow-md hover:shadow-lg transition transform transition duration-300 hover:scale-105 hover:shadow-xl"
               />
               <p className="mt-3 font-medium text-black">{designer.name}</p>
             </div>
