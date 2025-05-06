@@ -42,7 +42,7 @@ function Home() {
           className="w-1/2 h-full bg-cover bg-center"
           style={{
             backgroundImage:
-              "url('https://i.pinimg.com/736x/ff/cf/3f/ffcf3f2aafaa21c33652ac3bc9186501.jpg')",
+              "url('public/bghome4.jpg')",
           }}
         ></div>
 

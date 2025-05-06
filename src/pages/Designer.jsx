@@ -5,17 +5,17 @@ function Designer() {
         {
           id: 1, 
           name: "Leonardo Pratama",
-          image: "/images/leonardo.jpg",
+          image: "https://i.pinimg.com/736x/92/5d/c4/925dc42ab4d565440fc168d459c6bc2a.jpg",
         },
         {
           id: 2, 
           name: "Nadira Vera",
-          image: "/images/nadira.jpg",
+          image: "https://i.pinimg.com/736x/52/d7/e4/52d7e40bbc472afeb190030cf16471bb.jpg",
         },
         {
           id: 3,  
           name: "Nathan Wirawan",
-          image: "/images/nathan.jpg",
+          image: "https://i.pinimg.com/736x/4b/9b/e0/4b9be0ae3599b7b70e8c247ffaf56655.jpg",
         },
       ];
     
@@ -28,7 +28,7 @@ function Designer() {
                 className="w-1/2 h-full bg-cover bg-center"
                 style={{
                     backgroundImage:
-                    "url('https://i.pinimg.com/736x/ff/cf/3f/ffcf3f2aafaa21c33652ac3bc9186501.jpg')",
+                    "url('public/bghome4.jpg')",
                 }}
                 ></div>
 

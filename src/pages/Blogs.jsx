@@ -3,14 +3,21 @@ function Blogs() {
     {
       id: 1,
       title: "Cara Menata Ruang Tamu Minimalis",
-      imageUrl: "/images/article1.jpg",
+      imageUrl: "/public/blog3.png",
       content: "Ruang tamu minimalis cocok untuk rumah modern...",
       publishedAt: "2025-05-01"
     },
     {
       id: 2,
       title: "Inspirasi Dapur Estetik",
-      imageUrl: "/images/article2.jpg",
+      imageUrl: "/public/blog2.png",
+      content: "Dapur dengan warna earth tone sangat populer...",
+      publishedAt: "2025-05-01"
+    },
+    {
+      id: 3,
+      title: "Inspirasi Dapur Estetik",
+      imageUrl: "/public/blog1.png",
       content: "Dapur dengan warna earth tone sangat populer...",
       publishedAt: "2025-05-01"
     },
@@ -24,7 +31,7 @@ function Blogs() {
           className="w-1/2 h-full bg-cover bg-center"
           style={{
             backgroundImage:
-              "url('https://i.pinimg.com/736x/ff/cf/3f/ffcf3f2aafaa21c33652ac3bc9186501.jpg')",
+              "url('public/bghome4.jpg')",
           }}
         ></div>
 
@@ -56,13 +63,13 @@ function Blogs() {
           {articles.map((article) => (
             <div
               key={article.id}
-              className="flex gap-6 bg-white p-4 rounded shadow w-full"
+              className="flex gap-6 bg-white p-4 rounded shadow w-full shadow hover:shadow-lg transition rounded overflow-hidden"
             >
               {/* Gambar di kiri */}
               <img
                 src={article.imageUrl}
                 alt={article.title}
-                className="w-1/3 h-40 object-cover rounded"
+                className="h-70 object-cover rounded"
               />
 
               {/* Konten di kanan */}
