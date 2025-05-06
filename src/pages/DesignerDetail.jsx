@@ -1,6 +1,8 @@
 import { useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 function DesignerDetail() {
+  const navigate = useNavigate();
   const { id } = useParams(); // Ambil id dari URL
   const designers = [
     {
@@ -44,7 +46,15 @@ function DesignerDetail() {
 
   return (
     <>
-      <section className="p-6 pt-[60px] bg-[#8B7357] text-white min-h-[60vh] flex px-12 items-center justify-between">
+    <div className="pt-[70px] bg-[#8B7357] text-white flex font-bold">
+      <button
+        onClick={() => navigate('/Designer')}
+        className="text-3xl ml-5 hover:text-gray-300 transition"
+      >
+        <i class="ri-arrow-left-circle-line"></i>
+      </button>
+    </div>
+      <section className="h-[300px] bg-[#8B7357] text-white min-h-[20vh] flex px-12 items-center justify-between">
         <div>
           <p className="text-2xl mb-5">Hello, I'm</p>
           <h1 className="text-5xl font-serif font-bold mb-5 text">{designer.name}</h1>
@@ -56,15 +66,18 @@ function DesignerDetail() {
             <p>{designer.instagram}</p>
           </div>
         </div>
-        <div  className="w-68 h-58 object-cover">
-          <img src={designer.image} alt={designer.name} className="w-60 h-60 object-cover rounded-xl" />
+        <div  className="w-60 h-60 object-cover">
+          <img src={designer.image} alt={designer.name} className="w-full h-full object-cover rounded-xl" />
         </div>
       </section>
 
-      <section className="py-16 px-12 text-center bg-white">
-        <h2 className="text-4xl font-serif text-[#4e3b26] mb-8">About me</h2>
-          <div>
-          <img src={designer.image} alt={designer.name} className="w-60 h-60 object-cover rounded-xl" />
+      <section className="py-16 px-12 bg-white">
+        <h2 className="text-4xl font-serif text-center text-[#4e3b26] mb-8">About me</h2>
+          <div className="flex items-center justify-center gap-8">
+            <img src={designer.image} alt={designer.name} className="w-60 h-60 object-cover rounded-xl" />
+            <p className="max-w-xl text-left text-gray-700">
+              I’m {designer.name}, an interior designer who believes in the power of simplicity and space. I specialize in minimalist concepts and functional aesthetics, creating spaces that not only look beautiful but feel right.
+            </p>
           </div>
       </section>
 
