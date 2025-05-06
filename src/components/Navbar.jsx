@@ -40,7 +40,7 @@ function Navbar() {
           <Link to="/Designer">Designer</Link>
         </li>
         <li className="flex item-center gap-3">
-        <i className="ri-book-read-line text-3xl md:hidden block"></i>
+          <i className="ri-book-read-line text-3xl md:hidden block"></i>
           <Link to="/blogs">Blogs</Link>
         </li>
       </ul>

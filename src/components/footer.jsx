@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from 'react-router-dom';
 
 function Footer() {
   const [email, setEmail] = useState('');
@@ -26,11 +27,11 @@ function Footer() {
       <div>
         <h4 className="font-bold text-[#5A4B38]">MENU</h4>
         <ul className="mt-2 space-y-1 text-[#5A4B38]">
-          <li>Home</li>
-          <li>About Us</li>
-          <li>Explore</li>
-          <li>Designer</li>
-          <li>Blogs</li>
+          <li><Link to="/Home">Home</Link></li>
+          <li><Link to="/about-us">About Us</Link></li>
+          <li><Link to="/Explore">Explore</Link></li>
+          <li><Link to="/Designer">Designer</Link></li>
+          <li><Link to="/blogs">Blogs</Link></li>
         </ul>
       </div>
       <div>
