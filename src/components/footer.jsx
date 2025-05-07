@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from 'react-router-dom';
 
 function Footer() {
   const [email, setEmail] = useState('');
@@ -26,20 +27,20 @@ function Footer() {
       <div>
         <h4 className="font-bold text-[#5A4B38]">MENU</h4>
         <ul className="mt-2 space-y-1 text-[#5A4B38]">
-          <li>Home</li>
-          <li>About Us</li>
-          <li>Explore</li>
-          <li>Designer</li>
-          <li>Blogs</li>
+          <li><Link to="/Home">Home</Link></li>
+          <li><Link to="/about-us">About Us</Link></li>
+          <li><Link to="/Explore">Explore</Link></li>
+          <li><Link to="/Designer">Designer</Link></li>
+          <li><Link to="/blogs">Blogs</Link></li>
         </ul>
       </div>
       <div>
         <h4 className="font-bold text-[#5A4B38]">FOLLOW US</h4>
         <div className="flex space-x-2 mt-2">
-        <i class="ri-instagram-line text-3xl"></i>
-        <i class="ri-youtube-line text-3xl"></i>
-        <i class="ri-twitter-x-line text-3xl"></i>
-        <i class="ri-linkedin-fill text-3xl"></i>
+        <i className="ri-instagram-line text-3xl"></i>
+        <i className="ri-youtube-line text-3xl"></i>
+        <i className="ri-twitter-x-line text-3xl"></i>
+        <i className="ri-linkedin-fill text-3xl"></i>
         </div>
       </div>
       <div>

@@ -6,14 +6,13 @@ import AboutUs from './pages/AboutUs';
 import Explore from './pages/Explore';
 import Designer from './pages/Designer';
 import Blogs from './pages/Blogs';
-
-//import React, { useState } from 'react';
-//import './index.css';
-//import './App.css'; 
+import DesignerDetail from './pages/DesignerDetail';
+import ScrollToTop from './components/ScrollToTop';
 
 function App() {
   return (
       <div>
+      <ScrollToTop />
       <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
@@ -22,10 +21,10 @@ function App() {
           <Route path="/explore" element={<Explore />} />
           <Route path="/about-us" element={<AboutUs />} />
           <Route path="/home" element={<Home />} />
+          <Route path="/designer/:id" element={<DesignerDetail />} />
         </Routes>
         <Footer />
       </div> 
-
   );
 }
 
