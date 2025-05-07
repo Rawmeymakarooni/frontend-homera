@@ -1,75 +1,70 @@
+import { motion } from "framer-motion";
+
+
 function Home() {
   const rooms = [
-    {
-      name: "Living",
-      image: "/images/living.png",
-    },
-    {
-      name: "Bath",
-      image: "/images/bath.png",
-    },
-    {
-      name: "Bed",
-      image: "/images/bed.png",
-    },
-    {
-      name: "Kitchen",
-      image: "/images/kitchen.png",
-    },
+    { name: "Living", image: "/living.png" },
+    { name: "Bath", image: "/bath.png" },
+    { name: "Bed", image: "/bed.png" },
+    { name: "Kitchen", image: "/kitchen.png" },
   ];
+
   const designers = [
-    {
-      name: "Leonardo Pratama",
-      image: "/images/leonardo.jpg",
-    },
-    {
-      name: "Nadira Vera",
-      image: "/images/nadira.jpg",
-    },
-    {
-      name: "Nathan Wirawan",
-      image: "/images/nathan.jpg",
-    },
+    { name: "Leonardo Pratama", image: "/leo.png" },
+    { name: "Nadira Vera", image: "/nadira.png" },
+    { name: "Nathan Wirawan", image: "/nathan.png" },
   ];
+
   return (
     <>
-      {/* Section 1: Hero */}
-      <section className="flex w-full h-screen">
-        {/* Left image */}
-        <div
-          className="w-1/2 h-full bg-cover bg-center"
-          style={{
-            backgroundImage:
-              "url('public/bghome4.jpg')",
-          }}
-        ></div>
+    <div>
+      {/* BEST / YOUR muncul dari kiri */}
+      <motion.div
+        className="absolute left-0 ml-[-270px] z-20 text-[#36271C]"
+        initial={{ x: -300, opacity: 0 }}
+        animate={{ x: 0, opacity: 1 }}
+        transition={{
+          type: "spring",
+          stiffness: 80,
+          damping: 12,
+          bounce: 0.5,
+          delay: 0.5,
+        }}
+      >
+        <div>BEST</div>
+        <div>YOUR</div>
+      </motion.div>
 
-        {/* Right content */}
-        <div className="w-1/2 bg-[#8B7357] flex flex-col justify-center px-7 text-white relative z-10">
-          {/* Title */}
-          <div className="flex text-8xl font-serif mb-8 relative leading-tight">
-            {/* Kiri (BEST / YOUR) */}
-            <div className="absolute left-0 ml-[-270px] z-20 text-[#36271C] bg-transparent">
-              <div>BEST</div>
-              <div>YOUR</div>
-            </div>
+      {/* INTERIOR / HOME muncul dari kanan */}
+      <motion.div
+        className="ml-[18px] text-white"
+        initial={{ x: 300, opacity: 0 }}
+        animate={{ x: 0, opacity: 1 }}
+        transition={{
+          type: "spring",
+          stiffness: 80,
+          damping: 12,
+          bounce: 0.5,
+          delay: 0.5,
+        }}
+      >
+        <div>INTERIOR</div>
+        <div>HOME</div>
+        <motion.p
+          className="text-lg mt-4 text-white"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1.2, duration: 1.1 }}
+        >
+          Find the best interior design inspiration and connect directly
+          with professional designers. Homera is the place for creative ideas and
+          collaboration in interior design.
+        </motion.p>
+      </motion.div>
+    </div>
 
-            {/* Kanan (INTERIOR / HOME) */}
-            <div className="ml-[18px] text-white">
-              <div>INTERIOR</div>
-              <div>HOME</div>
-              <p className="text-lg mt-4 text-white">Find the best interior design inspiration and connect directly
-              with profesional designers. Homera is the place for creative ideas and
-              collaboration in interior design.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-      
-
-    {/* Section 2: EXPLORE BY ROOM */}
-    <section className="bg-white py-12 px-6">
+      {/* Section 2: EXPLORE BY ROOM */}
+      <section className="bg-white py-12 px-6">
         <h2 className="text-2xl font-semibold text-center mb-8 text-black">EXPLORE IDEAS BY ROOM</h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-6xl mx-auto">
           {rooms.map((room, index) => (
@@ -90,7 +85,7 @@ function Home() {
               <img
                 src={designer.image}
                 alt={designer.name}
-                className="w-32 h-32 object-cover rounded-full shadow-md hover:shadow-lg transition transform transition duration-300 hover:scale-105 hover:shadow-xl"
+                className="w-32 h-32 object-cover rounded-full shadow-md hover:shadow-lg transition duration-300 hover:scale-105 hover:shadow-xl"
               />
               <p className="mt-3 font-medium text-black">{designer.name}</p>
             </div>

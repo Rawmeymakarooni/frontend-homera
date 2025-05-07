@@ -1,6 +1,9 @@
 import Navbar from "@/components/Navbar";
+import React from "react";
+import { motion } from "framer-motion";
+
 function Blogs() {
-  const articles = [
+  const article = [
     {
       id: 1,
       title: "Cara Menata Halaman Minimalis",
@@ -26,17 +29,15 @@ function Blogs() {
 
   return (
     <>
-      <div className="font-serif">
-        <Navbar />
-
-        {/* HERO SECTION */}
+      <div className="font">
+      <Navbar />
+        {/* Section 1: Hero */}
         <section className="flex w-full h-screen">
           {/* Left image */}
           <div
             className="w-1/2 h-full bg-cover bg-center"
             style={{
-              backgroundImage:
-                "url('public/bghome4.jpg')",
+              backgroundImage: "url('/bghome4.jpg')", // ✅ Tanpa 'public/'
             }}
           ></div>
 
@@ -44,19 +45,49 @@ function Blogs() {
           <div className="w-1/2 bg-[#8B7357] flex flex-col justify-center px-7 text-white relative z-10">
             {/* Title */}
             <div className="flex items-center text-9xl font-serif mb-8">
-              <span
+              <motion.span
                 className="text-[#36271C] absolute left-0 ml-[-270px] z-20"
                 style={{ backgroundColor: "transparent" }}
+                initial={{ opacity: 0, x: -100 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8 }}
+                viewport={{ once: false }}
               >
                 HOM
-              </span>
-              <span className="ml-[18px] text-white">ÉRA</span>
+              </motion.span>
+              <motion.span
+                className="ml-[18px] text-white"
+                initial={{ opacity: 0, x: 100 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8 }}
+                viewport={{ once: false }}
+              >
+                ÉRA
+              </motion.span>
             </div>
+
+            {/* Blog Box */}
             <div className="relative left-[-100px] w-[500px] max-w-full">
               <div className="absolute inset-0 translate-x-3 translate-y-3 bg-[#C4B29A] rounded-sm z-0"></div>
               <div className="relative z-10 bg-[#5A4B38] p-5 rounded-sm flex flex-col items-center text-center">
-                <h2 className="text-4xl font-jost">BLOGS</h2>
-                <p className="mt-2 text-x1">We Create Elegant, Simple, and Luxury Interior Design</p>
+                <motion.h2
+                  className="text-4xl font-jost"
+                  initial={{ opacity: 0, y: 50 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8 }}
+                  viewport={{ once: false }}
+                >
+                  BLOGS
+                </motion.h2>
+                <motion.p
+                  className="mt-2 text-1x1"
+                  initial={{ opacity: 0, y: 50 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.2 }}
+                  viewport={{ once: false }}
+                >
+                  We Create Elegant, Simple, and Luxury Interior
+                </motion.p>
               </div>
             </div>
           </div>
@@ -65,31 +96,33 @@ function Blogs() {
         {/* BLOG SECTION */}
         <section className="bg-[#f9f9f9] p-6">
           <div className="space-y-6">
-            {articles.map((article) => (
-              <div
-                key={article.id}
-                className="flex gap-6 bg-white p-4 rounded shadow w-full shadow hover:shadow-lg transition rounded overflow-hidden"
+            {article.map((article, index) => (
+              <motion.div
+              key={article.id}
+              className="flex gap-6 bg-white p-4 rounded shadow w-full hover:shadow-lg transition overflow-hidden"
+              initial={{ opacity: 0, y: 60 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.2 }}
+              viewport={{ once: true }}
               >
-                {/* Gambar di kiri */}
                 <img
                   src={article.imageUrl}
                   alt={article.title}
                   className="h-70 object-cover rounded"
                 />
-
-                {/* Konten di kanan */}
+              
                 <div className="flex flex-col justify-start h-full">
-                  <p className="text-sm text-gray-500">
-                    {article.publishedAt} 
-                  </p>
-                  <h2 className="text-3xl font-semibold text-[#36271C] mt-2">
-                    {article.title}
-                  </h2>
-                  <p className="text-sm mt-2 text-gray-700">
-                    {article.content}
-                  </p>
-                </div>
-              </div>
+                    <p className="text-sm text-gray-500">
+                      {article.publishedAt} 
+                    </p>
+                    <h2 className="text-3xl font-semibold text-[#36271C] mt-2">
+                      {article.title}
+                    </h2>
+                    <p className="text-sm mt-2 text-gray-700">
+                      {article.content}
+                    </p>
+                  </div>
+              </motion.div>
             ))}
           </div>
         </section>

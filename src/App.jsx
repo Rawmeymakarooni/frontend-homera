@@ -7,17 +7,13 @@ import Explore from './pages/Explore';
 import Designer from './pages/Designer';
 import Blogs from './pages/Blogs';
 import DesignerDetail from './pages/DesignerDetail';
-
-
-//import React, { useState } from 'react';
-//import './index.css';
-//import './App.css'; 
+import ScrollToTop from './components/ScrollToTop';
 
 function App() {
   return (
       <div>
+      <ScrollToTop />
       <Navbar />
-
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/designer" element={<Designer />} />
@@ -29,7 +25,6 @@ function App() {
         </Routes>
         <Footer />
       </div> 
-
   );
 }
 
