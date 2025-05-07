@@ -37,10 +37,10 @@ function Footer() {
       <div>
         <h4 className="font-bold text-[#5A4B38]">FOLLOW US</h4>
         <div className="flex space-x-2 mt-2">
-        <i class="ri-instagram-line text-3xl"></i>
-        <i class="ri-youtube-line text-3xl"></i>
-        <i class="ri-twitter-x-line text-3xl"></i>
-        <i class="ri-linkedin-fill text-3xl"></i>
+        <i className="ri-instagram-line text-3xl"></i>
+        <i className="ri-youtube-line text-3xl"></i>
+        <i className="ri-twitter-x-line text-3xl"></i>
+        <i className="ri-linkedin-fill text-3xl"></i>
         </div>
       </div>
       <div>

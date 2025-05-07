@@ -64,7 +64,6 @@ function Home() {
               </p>
             </div>
           </div>
-<<<<<<< HEAD
         </div>
       </section>
       
@@ -96,8 +95,6 @@ function Home() {
               <p className="mt-3 font-medium text-black">{designer.name}</p>
             </div>
           ))}
-=======
->>>>>>> b89fb0d (Save local changes before pulling)
         </div>
       </section>
     </>
