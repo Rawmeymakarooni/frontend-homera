@@ -1,7 +1,45 @@
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
 
 function DesignerDetail() {
+  const [comments, setComments] = useState(() => {
+    const saved = localStorage.getItem("comments");
+    return saved ? JSON.parse(saved) : [];
+  });
+  const [newComment, setNewComment] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (newComment.trim() === "") return;
+
+  const updatedComments = [
+    { name: "You", text: newComment },
+    ...comments,
+  ];
+  
+  
+  // Ambil komentar dari localStorage saat pertama kali load
+  setComments(updatedComments);
+    localStorage.setItem("comments", JSON.stringify(updatedComments));
+    setNewComment("");
+  };
+
+  const handleDeleteComment = (index) => {
+    // Hapus komentar berdasarkan index
+    const updatedComments = comments.filter((_, i) => i !== index);
+    setComments(updatedComments);
+    
+    // Update localStorage
+    localStorage.setItem("comments", JSON.stringify(updatedComments));
+  };
+  
+  const rooms = [
+    { name: "Living", image: "/living.png" },
+    { name: "Bath", image: "/bath.png" },
+    { name: "Bed", image: "/bed.png" },
+    { name: "Kitchen", image: "/kitchen.png" },
+  ];
   const navigate = useNavigate();
   const { id } = useParams(); // Ambil id dari URL
   const designers = [
@@ -46,18 +84,19 @@ function DesignerDetail() {
 
   return (
     <>
-    <div className="pt-[70px] bg-[#8B7357] text-white flex font-bold">
-      <button
-        onClick={() => navigate('/Designer')}
-        className="text-3xl ml-5 hover:text-gray-300 transition"
-      >
-        <i class="ri-arrow-left-circle-line"></i>
-      </button>
-    </div>
-      <section className="h-[300px] bg-[#8B7357] text-white min-h-[20vh] flex px-12 items-center justify-between">
+    <div className="pt-[70px] bg-[#8B7357] text-white">
+      <div className="px-5 flex font-bold">
+        <button
+          onClick={() => navigate('/Designer')}
+          className="text-3xl ml-5 hover:text-gray-300 transition"
+        >
+          <i class="ri-arrow-left-circle-line"></i>
+        </button>
+      </div>
+      <section className="h-[300px] bg-[#8B7357] text-white min-h-[20vh] flex px-12 items-center justify-between mt-[-30px]">
         <div>
           <p className="text-2xl mb-5">Hello, I'm</p>
-          <h1 className="text-5xl font-serif font-bold mb-5 text">{designer.name}</h1>
+          <h1 className="text-5xl font-serif font-bold mb-3 text">{designer.name}</h1>
           <p className="text-5md font-serif">{designer.description}</p>
           <div className="mt-4 text-sm">
             <p>{designer.address}</p>
@@ -70,11 +109,12 @@ function DesignerDetail() {
           <img src={designer.image} alt={designer.name} className="w-full h-full object-cover rounded-xl" />
         </div>
       </section>
+    </div>
 
       <section className="py-16 px-12 bg-white">
         <h2 className="text-4xl font-serif text-center text-[#4e3b26] mb-8">About me</h2>
           <div className="flex items-center justify-center gap-8">
-            <img src={designer.image} alt={designer.name} className="w-60 h-60 object-cover rounded-xl" />
+            <img src={designer.image} alt={designer.name} className="w-60 h-60 object-cover rounded-full" />
             <p className="max-w-xl text-left text-gray-700">
               I’m {designer.name}, an interior designer who believes in the power of simplicity and space. I specialize in minimalist concepts and functional aesthetics, creating spaces that not only look beautiful but feel right.
             </p>
@@ -83,15 +123,70 @@ function DesignerDetail() {
 
       <section className="py-12 px-12 text-center bg-white">
       <h2 className="text-4xl font-serif text-[#4e3b26] mb-8">Portofolio</h2>
-      <div className="flex flex-col items-center">
-        <img src="" alt="Terrace" className="w-40 h-40 object-cover border" />
-        <p className="mt-2 text-sm">Teracce</p>
-      </div>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-6xl mx-auto">
+          {rooms.map((room, index) => (
+            <div
+              key={index}
+              className="shadow hover:shadow-lg transition rounded overflow-hidden"
+            >
+              <img
+                src={room.image}
+                alt={room.name}
+                className="w-full h-48 object-cover"
+              />
+              <div className="text-center py-3 text-lg font-medium text-black">
+                {room.name}
+              </div>
+            </div>
+          ))}
+        </div>
       </section>
 
-      <section className="py-16 px-12 text-center bg-white">
+      <section className="bg-white py-10 px-6">
+        <div className="max-w-2xl mx-auto">
         <h2 className="text-4xl font-serif text-[#4e3b26] mb-8">Testimonial</h2>
-        <div className="w-[80%] mx-auto h-32 bg-gray-300 rounded-2xl" />
+
+        {/* Daftar Komentar */}
+        <div className="w-full p-4 space-y-4">
+          {comments.map((comment, index) => (
+            <div
+              key={index}
+              className="bg-gray p-4 rounded shadow text-gray-800 flex justify-between items-start"
+            >
+              <div>
+                <p className="font-semibold">{comment.name}</p>
+                <p className="text-sm">{comment.text}</p>
+              </div>
+              <button
+                onClick={() => handleDeleteComment(index)}
+                className="text-red-600 hover:text-red-800 hover:scale-105 transition duration-300 ease-in-out transform flex items-center gap-1 ml-4"
+              >
+                <i className="ri-delete-bin-6-line text-lg"></i>
+              </button>
+            </div>
+          ))}
+        </div>
+
+       
+        {/* Form Komentar */}
+        <form onSubmit={handleSubmit} className="mb-6">
+          <textarea
+            rows="3"
+            className="w-full h-[60px] p-3 border border-[#8B7357] rounded-full mb-2 resize-none text-[#4e3b26]"
+            placeholder="Write Your Comments Here..."
+            value={newComment}
+            onChange={(e) => setNewComment(e.target.value)}
+          ></textarea>
+          <button
+            type="submit"
+            className="bg-[#8B7357] text-white px-4 py-2 rounded hover:bg-[#6e5e4b] transition"
+          >
+            Kirim
+          </button>
+        </form>
+
+        
+        </div>
       </section>
     </>
   );
