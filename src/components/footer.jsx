@@ -26,11 +26,11 @@ function Footer() {
           <div>
             <h4 className="font-bold">MENU</h4>
             <ul className="mt-2 space-y-1">
-              <li><Link to="/Home">Home</Link></li>
-              <li><Link to="/about-us">About Us</Link></li>
-              <li><Link to="/Explore">Explore</Link></li>
-              <li><Link to="/Designer">Designer</Link></li>
-              <li><Link to="/blogs">Blogs</Link></li>
+              <li><Link to="/Home" className="footer-link">Home</Link></li>
+              <li><Link to="/about-us" className="footer-link">About Us</Link></li>
+              <li><Link to="/Explore" className="footer-link">Explore</Link></li>
+              <li><Link to="/Designer" className="footer-link">Designer</Link></li>
+              <li><Link to="/blogs" className="footer-link">Blogs</Link></li>
             </ul>
           </div>
           <div>

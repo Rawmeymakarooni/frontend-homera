@@ -148,7 +148,7 @@ function Explore() {
             {filteredDesigns.map((item) => (
               <div
                 key={item.id}
-                className="bg-white shadow-md rounded-md border border-[#C4B29A] overflow-hidden"
+                className="bg-white shadow-md rounded-md border border-[#C4B29A] overflow-hidden "
               >
                 <img
                   src={item.image.startsWith("/") ? item.image : `/${item.image}`}
@@ -156,10 +156,10 @@ function Explore() {
                   className="w-full h-50 object-cover"
                 />
                 <div className="p-4">
-                  <h3 className="text-lg font-semibold text-[#36271C] hover:underline">
+                  <h3 className="text-lg font-semibold text-[#36271C] hover:underline font-weight-500 text-decoration-inherit hover:text-[#af7b43]">
                     <Link to={`/design/${item.id}`}>{item.title}</Link>
                   </h3>
-                  <p className="text-sm text-[#5A4B38] hover:underline">
+                  <p className="text-sm text-[#5A4B38] hover:underline font-weight-500 text-[#5A4B38] text-decoration-inherit hover:text-[#af7b43]">
                     <Link to={`/designer/${designerIdMap[item.designer]}`}>
                       {item.designer}
                     </Link>

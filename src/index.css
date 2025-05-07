@@ -14,14 +14,16 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-a {
-  font-weight: 500;
+.footer-link {
+  font-weight: 500; 
   color: #5A4B38;
   text-decoration: inherit;
 }
-a:hover {
-  color: #C77C47;
+
+.footer-link:hover {
+  color: #fff1e3;
 }
+*/
 
 body {
   margin: 0;
