@@ -96,7 +96,7 @@ function AboutUs() {
           transition={{ duration: 0.8, ease: "easeOut" }}
           viewport={{ once: false }}
         >
-          <h2 className="text-3xl font-bold mb-6">Get to Know Homéra</h2>
+          <h2 className="text-3xl font-bold mb-6">Welcome to Homéra</h2>
           <p className="mb-4 text-sm">
             Homéra adalah platform yang menghadirkan beragam inspirasi desain
             interior untuk membantu Anda menciptakan hunian yang nyaman, estetis,
@@ -138,7 +138,7 @@ function AboutUs() {
               "Desainer Profesional",
               "Portofolio Eksklusif",
               "Kolaborasi Mudah",
-              "Beragam Gaya",
+              "Beragam Gaya Desain",
             ].map((item, index) => (
               <motion.div
                 key={index}

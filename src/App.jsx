@@ -7,6 +7,7 @@ import Explore from './pages/Explore';
 import Designer from './pages/Designer';
 import Blogs from './pages/Blogs';
 import DesignerDetail from './pages/DesignerDetail';
+import DesignDetail from './pages/DesignDetail';
 import ScrollToTop from './components/ScrollToTop';
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
           <Route path="/about-us" element={<AboutUs />} />
           <Route path="/home" element={<Home />} />
           <Route path="/designer/:id" element={<DesignerDetail />} />
+          <Route path="/design/:id" element={<DesignDetail />} />
         </Routes>
         <Footer />
       </div> 

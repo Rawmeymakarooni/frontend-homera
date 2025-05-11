@@ -10,9 +10,9 @@ function Explore() {
   const allDesigns = [
     {
       id: 1,
-      title: "Judul Desain",
+      title: "Soft Earth Harmony",
       designer: "Leonardo Pratama",
-      image: "/living.png",
+      image: "/portodesain1.png",
       category: "Living",
     },
     {

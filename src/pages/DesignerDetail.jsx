@@ -35,7 +35,7 @@ function DesignerDetail() {
   };
   
   const rooms = [
-    { name: "Living", image: "/living.png" },
+    { name: "Soft Earth Harmony", image: "/portodesain1.png" },
     { name: "Bath", image: "/bath.png" },
     { name: "Bed", image: "/bed.png" },
     { name: "Kitchen", image: "/kitchen.png" },
