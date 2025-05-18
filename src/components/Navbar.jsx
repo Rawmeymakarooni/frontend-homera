@@ -55,7 +55,10 @@ function Navbar() {
           />
           <FiSearch className="w-5 h-5" />
         </div>
-        <FaUser className="w-6 h-6" />
+        <Link to="/register">
+  <FaUser className="w-6 h-6 cursor-pointer hover:text-yellow-300" />
+</Link>
+
         <div className="flex item-center gap-2">
           <i className="ri-menu-3-line text-3xl md:hidden block" onClick={handleClick}></i>
         </div>
