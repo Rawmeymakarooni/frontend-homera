@@ -27,10 +27,9 @@ export default function Login() {
 
   return (
     <div
-      className="flex justify-center items-center h-[90vh] bg-cover bg-center px-4 pt-24"
+      className="flex justify-center items-center min-h-screen bg-cover bg-center px-4 pt-36 pb-20"
       style={{
-        backgroundImage: `url('/your-background.jpg')`, // ganti path gambar sesuai kebutuhan
-      }}
+        backgroundImage: "url('/bg.png')" }}
     >
       <div className="bg-white p-6 rounded-2xl shadow-xl w-full max-w-md">
         <h2 className="text-3xl font-bold mb-6 text-center text-black bg-white">Log In</h2>

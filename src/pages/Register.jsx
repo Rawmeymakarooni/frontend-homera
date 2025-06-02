@@ -30,8 +30,7 @@ export default function Register() {
   <div
     className="flex justify-center items-center min-h-screen bg-cover bg-center px-4 pt-36 pb-20"
     style={{
-      backgroundImage: `url('/your-background.jpg')`, // Ganti sesuai path gambar latar
-    }}
+      backgroundImage: "url('/bghome4.jpg')" }}
   >
     <div className="bg-white p-6 rounded-2xl shadow-xl w-full max-w-md">
       <h2 className="text-3xl font-bold mb-6 text-center text-black bg-white">Sign Up</h2>
