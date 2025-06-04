@@ -81,3 +81,11 @@ button:focus-visible {
   display: none;                  /* Chrome, Safari, Opera */
 }
 
+/* Sembunyikan scrollbar di semua browser */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

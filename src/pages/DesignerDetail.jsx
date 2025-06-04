@@ -34,12 +34,6 @@ function DesignerDetail() {
     localStorage.setItem("comments", JSON.stringify(updatedComments));
   };
   
-  const rooms = [
-    { name: "Soft Earth Harmony", image: "/portodesain1.png" },
-    { name: "Bath", image: "/bath.png" },
-    { name: "Bed", image: "/bed.png" },
-    { name: "Kitchen", image: "/kitchen.png" },
-  ];
   const navigate = useNavigate();
   const { id } = useParams(); // Ambil id dari URL
   const designers = [
@@ -52,6 +46,16 @@ function DesignerDetail() {
       email: "leonardo.pratama@gmail.com",
       whatsapp: "+62 814-6362-2736",
       instagram: "@leonardp",
+      rooms: [
+        {name: "Soft Earth Harmony", image:"/portodesain1.png"},
+        {name: "Master Bedroom", image:"/bed22.jpg"},
+        {name: "Kitchen", image:"/kitchen2.jpg"},
+        {name: "Bathroom", image:"/bathroom2.jpg"},
+        {name: "Terrace", image:"/gardeen2.jpg"},
+        {name: "Swimming Pool", image:"/pool2.jpg"},
+        {name: "Kids Bedroom", image:"/bed2.jpg"},
+        {name: "Diningroom", image:"/dining2.jpg"},
+      ],
     },
     {
       id: 2,
@@ -62,6 +66,16 @@ function DesignerDetail() {
       email: "nadiravera@gmail.com",
       whatsapp: "+62 814-6772-0737",
       instagram: "@nad.vera",
+      rooms: [
+        {name: "Master Bedroom", image:"/bed.png"},
+        {name: "Living Room", image:"/living.png"},
+        {name: "Kitchen", image:"/kitchen.png"},
+        {name: "Bathroom", image:"/bath.png"},
+        {name: "Swimming Pool", image:"/modernpool.jpg"},
+        {name: "Dining Room", image:"/moderndining.jpg"},
+        {name: "Terrace", image:"/modernterrace.jpg"},
+        {name: "Kids Bedroom", image:"/modernkidsbed.jpg"},
+      ],
     },
     {
       id: 3,
@@ -72,6 +86,16 @@ function DesignerDetail() {
       email: "nathanwira@gmail.com",
       whatsapp: "+62 880-9372-0737",
       instagram: "@nathan_wira",
+      rooms: [
+        {name: "Kitchen", image:"/kitchenindustrial.jpg"},
+        {name: "Bathroom", image:"/bathindustrial.jpg"},
+        {name: "Master Bedroom", image:"/bedindustrial.jpg"},
+        {name: "Livingroom", image:"/livingindustrial.jpg"},
+        {name: "Diningroom", image:"/diningindustrial.jpg"},
+        {name: "Swimming Pool", image:"/poolindustrial.jpg"},
+        {name: "Terrace", image:"/terraceindustrial.jpg"},
+        {name: "Kids Bedroom", image:"/kidsbedindustrial.jpg"},
+      ],
     },
   ];
 
@@ -122,29 +146,31 @@ function DesignerDetail() {
       </section>
 
       <section className="py-12 px-12 text-center bg-white">
-      <h2 className="text-4xl font-serif text-[#4e3b26] mb-8">Portofolio</h2>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-6xl mx-auto">
-          {rooms.map((room, index) => (
-            <div
-              key={index}
-              className="shadow hover:shadow-lg transition rounded overflow-hidden"
-            >
-              <img
-                src={room.image}
-                alt={room.name}
-                className="w-full h-48 object-cover"
-              />
-              <div className="text-center py-3 text-lg font-medium text-black">
-                {room.name}
+        <h2 className="text-4xl font-serif text-[#4e3b26] mb-8">Portofolio</h2>
+        <div className="max-h-[600px] overflow-y-auto scrollbar-hide pb-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-6xl mx-auto">
+            {designer.rooms.map((room, index) => (
+              <div
+                key={index}
+                className="shadow hover:shadow-lg transition rounded overflow-hidden"
+              >
+                <img
+                  src={room.image}
+                  alt={room.name}
+                  className="w-full h-48 object-cover"
+                />
+                <div className="text-center py-3 text-lg font-medium text-black">
+                  {room.name}
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </section>
 
       <section className="bg-white py-10 px-6">
         <div className="max-w-2xl mx-auto">
-        <h2 className="text-4xl font-serif text-[#4e3b26] mb-8">Testimonial</h2>
+        <h2 className="text-4xl text-center font-serif text-[#4e3b26] mb-8">Testimonial</h2>
 
         {/* Daftar Komentar */}
         <div className="w-full p-4 space-y-4">
