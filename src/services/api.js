@@ -3,8 +3,8 @@
  * Berisi fungsi-fungsi untuk mengakses API backend
  */
 
-// Base URL API - menggunakan proxy dari Vite sehingga tidak perlu full URL
-const API_URL = '/api';
+// Base URL API - menggunakan environment variable atau fallback ke proxy
+const API_URL = import.meta.env.VITE_API_URL || '';
 
 /**
  * Ambil 5 user random status Post yang punya portofolio aktif
@@ -65,7 +65,7 @@ export async function getExplorePortofoliosByCategory(category) {
 }
 
 export async function getPortofoliosByCategory(category) {
-  const res = await fetch(`http://localhost:3000/portofolio/category/${category}`, {
+  const res = await fetch(`${API_URL}/portofolio/category/${category}`, {
     method: 'GET',
     credentials: 'include',
   });
@@ -90,7 +90,7 @@ export async function getPortofoliosByCategory(category) {
 }
 
 export async function getHomePortos() {
-  const res = await fetch('http://localhost:3000/home-portos', {
+  const res = await fetch(`${API_URL}/home-portos`, {
     method: 'GET',
     credentials: 'include',
   });
