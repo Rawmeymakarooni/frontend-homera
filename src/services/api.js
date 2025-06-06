@@ -90,9 +90,13 @@ export async function getPortofoliosByCategory(category) {
 }
 
 export async function getHomePortos() {
+  console.log('Fetching home portos from:', `${API_URL}/home-portos`);
   const res = await fetch(`${API_URL}/home-portos`, {
     method: 'GET',
     credentials: 'include',
+    headers: {
+      'Accept': 'application/json'
+    },
   });
   if (!res.ok) {
     throw new Error('Gagal mengambil data portofolio home');
@@ -315,8 +319,14 @@ export const registerUser = async (userData) => {
  */
 export const loginUser = async (credentials) => {
   try {
+    console.log('Login attempt with:', credentials.uname || credentials.email);
     const uname = credentials.uname || credentials.email;
-    const response = await fetch('/login', {
+    
+    // Gunakan API URL yang dikonfigurasi untuk memastikan request dikirim ke backend yang benar
+    const loginUrl = `${API_URL}/login`;
+    console.log('Sending login request to:', loginUrl);
+    
+    const response = await fetch(loginUrl, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -329,19 +339,31 @@ export const loginUser = async (credentials) => {
       credentials: 'include'
     });
 
-    let data;
-    try {
-      data = await response.json();
-    } catch (jsonErr) {
-      // Jika response bukan JSON, tampilkan response text
-      const text = await response.text();
-      throw new Error(`Gagal login. Status: ${response.status}. Response: ${text}`);
-    }
-
+    console.log('Login response status:', response.status);
+    
+    // PENTING: Hanya baca response body satu kali
+    // Clone response sebelum membaca body jika perlu debugging
     if (!response.ok) {
-      throw new Error(data.message || 'Login gagal');
+      // Jika response tidak OK, kita perlu memeriksa apakah ada pesan error dari server
+      const errorResponse = await response.text(); // Baca sebagai text untuk menghindari error parsing
+      console.error('Login failed with status:', response.status, errorResponse);
+      
+      let errorMessage = `Login failed with status ${response.status}`;
+      try {
+        // Coba parse sebagai JSON jika memungkinkan
+        const errorData = JSON.parse(errorResponse);
+        errorMessage = errorData.message || errorMessage;
+      } catch (e) {
+        // Jika bukan JSON valid, gunakan response text asli
+        errorMessage = errorResponse || errorMessage;
+      }
+      
+      throw new Error(errorMessage);
     }
-
+    
+    // Jika response OK, baca JSON data
+    const data = await response.json();
+    console.log('Login successful, token received');
     return data;
   } catch (error) {
     console.error('Login error:', error);
