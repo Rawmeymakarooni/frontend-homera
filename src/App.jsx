@@ -11,8 +11,8 @@ import Blogs from './pages/Blogs';
 import DesignerDetail from './pages/DesignerDetail';
 import DesignDetail from './pages/DesignDetail';
 import ScrollToTop from './components/ScrollToTop';
-import ForgotPassword from './pages/forgotpassword';
-import NewPassword from './pages/Newpassword';
+import ForgotPassword from './pages/ForgotPassword';
+import NewPassword from './pages/NewPassword';
 import EditProfile from './pages/EditProfile';
 
 function App() {
@@ -31,8 +31,8 @@ function App() {
           <Route path="/home" element={<Home />} />
           <Route path="/designer/:id" element={<DesignerDetail />} />
           <Route path="/design/:id" element={<DesignDetail />} />
-          <Route path="/forgotpassword" element={<ForgotPassword />} />
-          <Route path="/Newpassword" element={<NewPassword />} />
+          <Route path="/ForgotPassword" element={<ForgotPassword />} />
+          <Route path="/NewPassword" element={<NewPassword />} />
           <Route path="/EditProfile" element={<EditProfile />} />
         </Routes>
         <Footer />

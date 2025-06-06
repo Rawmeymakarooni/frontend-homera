@@ -29,7 +29,7 @@ export default function VerifyCode() {
     }
   
     alert(`Kode ${finalCode} berhasil diverifikasi!`);
-    navigate('/newpassword');
+    navigate('/NewPassword');
   };
   
 
