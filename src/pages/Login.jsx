@@ -1,6 +1,7 @@
 // src/pages/Login.jsx
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 export default function Login() {
   const navigate = useNavigate();
@@ -67,9 +68,10 @@ export default function Login() {
   </label>
 
   {/* Forgot password link */}
-  <a href="/forgot-password" className="text-sm text-red-500 hover:underline">
-    Forgot your password?
-  </a>
+  <Link to="/forgotpassword" className="text-sm text-red-500 hover:underline">
+  Forgot your password?
+</Link>
+
 </div>
           <button
             type="submit"
