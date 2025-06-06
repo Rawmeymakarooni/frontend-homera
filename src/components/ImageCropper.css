@@ -1,0 +1,30 @@
+.reactEasyCrop_Container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: #f0f0f0;
+  border-radius: 8px;
+}
+
+.reactEasyCrop_Image,
+.reactEasyCrop_Video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.reactEasyCrop_CropArea {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-sizing: border-box;
+  box-shadow: 0 0 0 9999em rgba(0, 0, 0, 0.6);
+  overflow: hidden;
+  border-radius: 50%; /* For rounded crop boundary */
+}

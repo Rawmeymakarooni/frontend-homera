@@ -1,28 +1,78 @@
 // src/pages/Login.jsx
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import { loginUser } from '../services/api';
 
 export default function Login() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    email: '',
+    unameOrEmail: '',
     password: '',
   });
+  const [keepLogin, setKeepLogin] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleKeepLoginChange = (e) => {
+    setKeepLogin(e.target.checked);
+  }
 
-    // Sementara: validasi dummy
-    if (formData.email && formData.password) {
-      alert('Login sukses!');
-      navigate('/'); // Arahkan ke home atau dashboard
-    } else {
-      alert('Mohon isi email dan password');
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError('');
+    
+    if (!formData.unameOrEmail || !formData.password) {
+      setError('Mohon isi username/email dan password');
+      return;
+    }
+    
+    try {
+      setIsLoading(true);
+      // Kirim field uname ke backend (boleh username atau email)
+      const response = await loginUser({
+        uname: formData.unameOrEmail,
+        password: formData.password,
+        setCookie: keepLogin // true jika keep me logged in, false jika tidak
+      });
+      // Simpan token ke localStorage atau sessionStorage berdasarkan keepLogin
+      if (response.token) {
+        if (keepLogin) {
+          // Jika keepLogin dicentang, simpan di localStorage (bertahan setelah browser ditutup)
+          localStorage.setItem('accessToken', response.token);
+          localStorage.removeItem('tempAccessToken'); // Hapus dari sessionStorage jika ada
+        } else {
+          // Jika keepLogin tidak dicentang, simpan di sessionStorage (hilang saat browser ditutup)
+          sessionStorage.setItem('tempAccessToken', response.token);
+          localStorage.removeItem('accessToken'); // Hapus dari localStorage jika ada
+        }
+      }
+      
+      if (response.refreshToken) {
+        if (keepLogin) {
+          localStorage.setItem('refreshToken', response.refreshToken);
+          localStorage.removeItem('tempRefreshToken');
+        } else {
+          sessionStorage.setItem('tempRefreshToken', response.refreshToken);
+          localStorage.removeItem('refreshToken');
+        }
+      }
+      
+      // Simpan status keepLogin
+      localStorage.setItem('keepLogin', keepLogin.toString());
+      
+      console.log('Login berhasil:', response);
+      console.log('Keep login status:', keepLogin);
+      
+      // Reload halaman agar Navbar memperbarui status login
+      window.location.href = '/home'; // Gunakan window.location untuk full reload
+    } catch (err) {
+      setError(err.message || 'Login gagal, periksa kredensial Anda');
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -35,13 +85,19 @@ export default function Login() {
       <div className="bg-white p-6 rounded-2xl shadow-xl w-full max-w-md">
         <h2 className="text-3xl font-bold mb-6 text-center text-black bg-white">Log In</h2>
 
+      {error && (
+        <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4 relative">
+          <span className="block sm:inline">{error}</span>
+        </div>
+      )}
+
         <form onSubmit={handleSubmit} className="space-y-4">
-          <label className="block mb-2 font-semibold text-gray-700">Email</label>
+          <label className="block mb-2 font-semibold text-gray-700">Username atau Email</label>
           <input
-            type="email"
-            name="email"
-            placeholder="Enter your email"
-            value={formData.email}
+            type="text"
+            name="unameOrEmail"
+            placeholder="Masukkan username atau email"
+            value={formData.unameOrEmail}
             onChange={handleChange}
             className="w-full border rounded p-2 mb-4 text-black bg-white"
             required
@@ -60,24 +116,25 @@ export default function Login() {
 <div className="flex items-center justify-between mt-4">
   {/* Checkbox */}
   <label className="flex items-center space-x-2 text-gray-700 text-sm">
-    <input
-      type="checkbox"
-      className="form-checkbox h-4 w-4 text-red-500 border-gray-300 rounded"
-    />
-    <span>Keep me signed in</span>
+          <input
+            type="checkbox"
+            checked={keepLogin}
+            onChange={handleKeepLoginChange}
+            className="form-checkbox h-4 w-4 text-red-500 border-gray-300 rounded"
+          /> <span>Keep me signed in</span>
   </label>
 
   {/* Forgot password link */}
-  <Link to="/ForgotPassword" className="text-sm text-red-500 hover:underline">
-  Forgot your password?
-</Link>
-
+  <a href="/forgot-password" className="text-sm text-red-500 hover:underline">
+    Forgot your password?
+  </a>
 </div>
           <button
             type="submit"
-            className="w-full bg-red-600 text-white py-2 rounded hover:bg-red-700 transition"
+            disabled={isLoading}
+            className={`w-full bg-red-600 text-white py-2 rounded hover:bg-red-700 transition ${isLoading ? 'opacity-70 cursor-not-allowed' : ''}`}
           >
-            Log In
+            {isLoading ? 'Processing...' : 'Log In'}
           </button>
         </form>
 

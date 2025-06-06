@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 
@@ -15,24 +16,29 @@ function Home() {
     { name: "Nathan Wirawan", image: "/nathan.png" },
   ];
 
-  const exploreExamples = [
-    {
-      name: "Soft Earth Harmony",
-      image: "/portodesain1.png",
-      designer: "Leonardo Pratama",
-    },
-    {
-      name: "Modern Dream Space",
-      image: "/bed.png",
-      designer: "Nadira Vera",
-    },
-  ];
+  // Dua portofolio random dari backend
+  const [homePortos, setHomePortos] = useState([]);
+  const [loadingHomePortos, setLoadingHomePortos] = useState(true);
+  const [homePortoError, setHomePortoError] = useState(null);
 
-  const designerIdMap = {
-    "Leonardo Pratama": 1,
-    "Nadira Vera": 2,
-    "Nathan Wirawan": 3,
-  };
+  useEffect(() => {
+    let isMounted = true;
+    setLoadingHomePortos(true);
+    setHomePortoError(null);
+    import('../services/api').then(({ getHomePortos }) => {
+      getHomePortos()
+        .then(portos => {
+          if (isMounted) setHomePortos(portos);
+        })
+        .catch(err => {
+          if (isMounted) setHomePortoError(err.message || 'Gagal memuat portofolio');
+        })
+        .finally(() => {
+          if (isMounted) setLoadingHomePortos(false);
+        });
+    });
+    return () => { isMounted = false; };
+  }, []);
 
   return (
     <>
@@ -102,30 +108,48 @@ function Home() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
           {/* Dua gambar desain */}
           <div className="md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-8">
-            {exploreExamples.map((item, idx) => (
-              <div
-                key={idx}
-                className="bg-white shadow-md rounded-lg overflow-hidden hover:shadow-xl transition duration-300"
-              >
-                <Link to={`/design/${idx + 1}`}>
-                  <img
-                    src={item.image}
-                    alt={item.name}
-                    className="w-full h-52 object-cover hover:brightness-90 transition"
-                  />
-                </Link>
-                <div className="p-4">
-                  <h3 className="text-xl font-semibold text-[#36271C] hover:underline hover:text-[#af7b43]">
-                    <Link to={`/design/${idx + 1}`}>{item.name}</Link>
-                  </h3>
-                  <p className="text-sm text-[#5A4B38] hover:underline hover:text-[#af7b43]">
-                    <Link to={`/designer/${designerIdMap[item.designer]}`}>
-                      {item.designer}
+            {loadingHomePortos ? (
+              <div className="col-span-2 text-center text-gray-400">Loading...</div>
+            ) : homePortoError ? (
+              <div className="col-span-2 text-center text-red-400">{homePortoError}</div>
+            ) : homePortos.length === 0 ? (
+              <div className="col-span-2 text-center text-gray-400">Belum ada portofolio.</div>
+            ) : (
+              homePortos.map(item => {
+                const portoId = item.porto_id || item.portofolioId;
+                return (
+                  <div key={portoId} className="bg-white rounded-xl shadow-md overflow-hidden flex flex-col">
+                    <Link to={`/design/${portoId}`} className="block w-full aspect-[4/3] bg-gray-100 overflow-hidden">
+                      <img
+                        src={item.cover ? item.cover : "/noimage.png"}
+                        alt={item.title}
+                        className="object-cover w-full h-full transition hover:scale-105 duration-300"
+                        onError={e => { e.target.onerror = null; e.target.src = "/noimage.png"; }}
+                      />
                     </Link>
-                  </p>
-                </div>
-              </div>
-            ))}
+                    <div className="p-4 flex-1 flex flex-col justify-between">
+                      <div>
+                        <Link to={`/design/${portoId}`} className="font-semibold text-lg text-[#1a1208] hover:text-[#af7b43] transition line-clamp-2">{item.title}</Link>
+                        <div className="text-sm text-[#6b4f27] mt-1">Kategori: {item.kategori}</div>
+                      </div>
+                      <div className="mt-2">
+                        {item.uid && (
+                          <Link to={`/designer/${item.uid}`} className="text-[#af7b43] font-semibold hover:underline">
+                            by {item.uname}
+                          </Link>
+                        )}
+                        {/* Fallback jika belum ada uid */}
+                        {!item.uid && item.uname && (
+                          <Link to={`/designer/${item.uname}`} className="text-[#af7b43] font-semibold hover:underline">
+                            by {item.uname}
+                          </Link>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                );
+              })
+            )}
           </div>
 
           {/* Teks + tombol di samping */}
