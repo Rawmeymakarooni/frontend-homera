@@ -25,7 +25,7 @@ const API_URL = import.meta.env.VITE_API_URL || '';
  * @returns {Promise<Object>} data designer
  */
 export async function getDesignerDetailsByUid(uid) {
-  const res = await fetch(`/designerdetails?uid=${uid}`);
+  const res = await fetch(`${API_URL}/designerdetails?uid=${uid}`);
   if (!res.ok) {
     throw new Error('Gagal mengambil detail designer');
   }
@@ -40,7 +40,7 @@ export async function getDesignerDetailsByUid(uid) {
  * @returns {Promise<Array>} daftar portofolio
  */
 export async function getExplorePortofoliosByCategory(category) {
-  const res = await fetch(`/portofolio/explore/${category}`, {
+  const res = await fetch(`${API_URL}/portofolio/explore/${category}`, {
     method: 'GET',
     credentials: 'include',
   });
@@ -162,7 +162,9 @@ export async function authFetch(url, options = {}) {
     headers,
     credentials: 'include',
   };
-  let response = await fetch(url, fetchOptions);
+  // Ensure URL has API_URL prefix if it's not an absolute URL
+  const fullUrl = url.startsWith('http') ? url : `${API_URL}${url}`;
+  let response = await fetch(fullUrl, fetchOptions);
   if (response.status === 401) {
     // Coba refresh token sekali
     try {
@@ -248,10 +250,11 @@ export const registerUser = async (userData) => {
       console.log(`${pair[0]}: ${pair[1] instanceof File ? `File: ${pair[1].name} (${pair[1].type}, ${pair[1].size} bytes)` : pair[1]}`);
     }
     
-    console.log('Sending registration request to:', '/register');
+    // Hapus log yang tidak digunakan lagi
     
     try {
-      const response = await fetch('/register', {
+      console.log('Sending registration request to:', `${API_URL}/register`);
+      const response = await fetch(`${API_URL}/register`, {
         method: 'POST',
         body: formData,
         // Jangan set Content-Type karena browser akan otomatis set boundary untuk FormData
