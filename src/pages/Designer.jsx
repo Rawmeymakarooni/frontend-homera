@@ -103,10 +103,13 @@ function Designer() {
             {designers.map((designer, index) => (
               <Link key={designer.uid} to={`/designer/${designer.uid}`} className="flex flex-col items-center w-56 group cursor-pointer">
                 <img
-                  src={designer.ppict || "/noimage.png"}
+                  src={designer.profilePicture || (designer.ppict?.startsWith('http') ? designer.ppict : `/${designer.ppict}`) || "/noimage.png"}
                   alt={designer.uname}
                   className="w-32 h-32 object-cover rounded-full shadow-md hover:shadow-lg transition transform duration-300 hover:scale-105 hover:shadow-xl group-hover:ring-2 group-hover:ring-[#af7b43]"
-                  onError={e => { e.target.onerror = null; e.target.src = "/noimage.png"; }}
+                  onError={e => { 
+                    e.target.onerror = null; 
+                    e.target.src = "https://res.cloudinary.com/dqpnrqvzi/image/upload/v1686138329/homera/profil/Default.jpg"; 
+                  }}
                 />
                 <p className="mt-3 font-medium text-black group-hover:text-[#af7b43]">{designer.uname}</p>
               </Link>

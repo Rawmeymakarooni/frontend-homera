@@ -89,7 +89,16 @@ function DesignerDetail() {
             </div>
           </div>
           <div className="w-60 h-60 object-cover">
-            <img src={`/${designer.data.ppict}`} alt={designer.data.uname} className="w-full h-full object-cover rounded-xl" />
+            {/* Gunakan profilePicture yang sudah diformat oleh backend atau fallback ke ppict dengan penanganan URL yang benar */}
+            <img 
+              src={designer.data.profilePicture || (designer.data.ppict?.startsWith('http') ? designer.data.ppict : `/${designer.data.ppict}`)} 
+              alt={designer.data.uname} 
+              className="w-full h-full object-cover rounded-xl"
+              onError={(e) => {
+                e.target.onerror = null;
+                e.target.src = 'https://res.cloudinary.com/dqpnrqvzi/image/upload/v1686138329/homera/profil/Default.jpg';
+              }} 
+            />
           </div>
         </section>
       </div>

@@ -41,7 +41,15 @@ function DesignDetail() {
       </section>
       {/* Image with designer & logo */}
       <section className="relative w-full">
-        <img src={data.cover || "/noimage.png"} alt={data.title} className="w-full object-cover" />
+        <img 
+          src={data.cover?.startsWith('http') ? data.cover : `/${data.cover}` || "/noimage.png"} 
+          alt={data.title} 
+          className="w-full object-cover h-[400px]" 
+          onError={(e) => {
+            e.target.onerror = null;
+            e.target.src = "/noimage.png";
+          }}
+        />
         {/* Designer name */}
         {data.uname && data.userId && (
           <Link
