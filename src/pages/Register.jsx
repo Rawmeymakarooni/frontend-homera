@@ -155,36 +155,124 @@ export default function Register() {
       // Log untuk debugging
       console.log('Mengirim data ke endpoint /register');
       
-      // Submit to backend
-      const response = await fetch('/register', {
-        method: 'POST',
-        body: formDataToSend, // FormData automatically sets correct Content-Type
-      });
+      // Tentukan base URL berdasarkan environment
+      const baseUrl = process.env.NODE_ENV === 'production'
+        ? 'https://webhomera.vercel.app'
+        : '';
+      
+      // Coba endpoint /api/register terlebih dahulu (untuk Vercel)
+      let response;
+      try {
+        // Tambahkan header untuk CORS
+        const fetchOptions = {
+          method: 'POST',
+          body: formDataToSend,
+          mode: 'cors',
+          headers: {
+            // FormData akan otomatis mengatur Content-Type yang benar
+            // Jangan tambahkan Content-Type manual untuk FormData
+          }
+        };
+        
+        console.log('Mencoba endpoint /api/register');
+        try {
+          response = await fetch(`${baseUrl}/api/register`, fetchOptions);
+          console.log('Response dari /api/register:', response.status);
+        } catch (apiError) {
+          console.warn('Error saat akses /api/register:', apiError.message);
+          // Jika gagal dengan endpoint pertama, coba endpoint kedua
+          console.log('Mencoba endpoint /register sebagai fallback');
+          response = await fetch(`${baseUrl}/register`, fetchOptions);
+          console.log('Response dari /register:', response.status);
+        }
+        
+        // Jika masih 404, coba endpoint tanpa baseUrl (untuk development)
+        if (response.status === 404) {
+          console.log('Mencoba endpoint lokal tanpa baseUrl');
+          response = await fetch('/register', fetchOptions);
+          console.log('Response dari endpoint lokal:', response.status);
+        }
+      } catch (fetchError) {
+        console.error('Semua fetch request gagal:', fetchError);
+        throw new Error(`Gagal terhubung ke server: ${fetchError.message}. Periksa koneksi internet Anda atau coba lagi nanti.`);
+      }
       
       console.log('Response status:', response.status);
       
       if (!response.ok) {
+        // Coba parse response sebagai JSON jika ada
+        let errorText = '';
         try {
-          const err = await response.json();
-          console.log('Error response:', err);
-          // Cek berbagai format error response dari backend
-          if (err.message) {
-            throw new Error(err.message);
-          } else if (err.error) {
-            throw new Error(err.error);
-          } else if (typeof err === 'string') {
-            throw new Error(err);
+          // Cek content-type untuk menentukan cara parsing yang tepat
+          const contentType = response.headers.get('content-type');
+          console.log('Error response content-type:', contentType);
+          
+          // Coba dapatkan teks response terlebih dahulu
+          errorText = await response.text();
+          console.log('Raw error response text:', errorText);
+          
+          // Jika ada teks dan kemungkinan valid JSON, coba parse
+          if (errorText && errorText.trim()) {
+            // Coba parse sebagai JSON terlepas dari content-type
+            // karena beberapa server mungkin mengirim JSON dengan content-type yang salah
+            try {
+              const err = JSON.parse(errorText);
+              console.log('Parsed error response:', err);
+              
+              // Cek berbagai format error response dari backend
+              if (err.message) {
+                throw new Error(err.message);
+              } else if (err.error) {
+                throw new Error(err.error);
+              } else if (typeof err === 'string') {
+                throw new Error(err);
+              } else if (err.errors && Array.isArray(err.errors)) {
+                // Format validasi error dengan array errors
+                throw new Error(err.errors.map(e => e.msg || e.message || e).join(', '));
+              } else {
+                // Jika tidak ada format yang dikenali, gunakan status code
+                throw new Error(`Error ${response.status}: ${err.toString() || 'Gagal registrasi'}`);
+              }
+            } catch (jsonParseError) {
+              // Jika bukan JSON valid, gunakan teks mentah
+              console.error('JSON parsing error:', jsonParseError);
+              
+              // Coba deteksi pesan error dari teks HTML (jika server mengirim HTML error page)
+              if (errorText.includes('<!DOCTYPE html>')) {
+                // Ini adalah halaman HTML, ekstrak pesan error jika mungkin
+                if (response.status === 405) {
+                  throw new Error('Metode HTTP tidak diizinkan (405). Gunakan endpoint yang benar untuk registrasi.');
+                } else if (response.status === 404) {
+                  throw new Error('Endpoint tidak ditemukan (404). URL registrasi mungkin salah.');
+                } else if (response.status === 500) {
+                  throw new Error('Server mengalami kesalahan internal (500). Silakan coba lagi nanti.');
+                } else {
+                  throw new Error(`Error ${response.status}: Server mengembalikan halaman HTML bukan JSON`);
+                }
+              } else {
+                // Gunakan teks mentah sebagai pesan error
+                throw new Error(errorText || `Error ${response.status}: Gagal registrasi`);
+              }
+            }
           } else {
-            throw new Error('Gagal registrasi');
+            // Response kosong
+            if (response.status === 405) {
+              throw new Error('Metode tidak diizinkan (405). Gunakan endpoint yang benar untuk registrasi.');
+            } else if (response.status === 404) {
+              throw new Error('Endpoint tidak ditemukan (404). URL registrasi mungkin salah.');
+            } else if (response.status === 500) {
+              throw new Error('Server mengalami kesalahan internal (500). Silakan coba lagi nanti.');
+            } else if (response.status === 413) {
+              throw new Error('Ukuran file terlalu besar (413). Gunakan gambar yang lebih kecil.');
+            } else {
+              throw new Error(`Error ${response.status}: Server mengembalikan respons kosong`);
+            }
           }
-        } catch (jsonError) {
-          console.error('JSON parsing error:', jsonError);
-          // Jika jsonError adalah Error object dengan message, gunakan itu
-          if (jsonError instanceof Error && jsonError.message !== 'Unexpected end of JSON input') {
-            throw jsonError;
+        } catch (responseError) {
+          if (responseError instanceof Error) {
+            throw responseError;
           } else {
-            // Handle case where response is not valid JSON
-            throw new Error('Server tidak merespon dengan benar. Coba lagi nanti. Status: ' + response.status);
+            throw new Error(`Error ${response.status}: Server tidak merespon dengan benar`);
           }
         }
       }

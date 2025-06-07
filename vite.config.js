@@ -29,7 +29,18 @@ export default defineConfig({
         secure: false, 
         timeout: 60000 // 1 menit timeout
       },
-
+      '/register': {
+        target: 'http://localhost:3000',
+        changeOrigin: true,
+        secure: false,
+        timeout: 60000 // 1 menit timeout
+      },
+      '/login': {
+        target: 'http://localhost:3000',
+        changeOrigin: true,
+        secure: false,
+        timeout: 60000 // 1 menit timeout
+      },
       '/refresh-token': {
         target: 'http://localhost:3000',
         changeOrigin: true,

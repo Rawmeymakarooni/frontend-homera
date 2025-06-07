@@ -12,39 +12,74 @@ const createImage = (url) =>
     image.src = url;
   });
 
-// Fungsi untuk mendapatkan crop area
+// Fungsi untuk mendapatkan crop area dengan optimasi untuk Vercel deployment
 const getCroppedImg = async (imageSrc, pixelCrop) => {
-  const image = await createImage(imageSrc);
-  const canvas = document.createElement('canvas');
-  const ctx = canvas.getContext('2d');
+  try {
+    const image = await createImage(imageSrc);
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
 
-  if (!ctx) {
+    if (!ctx) {
+      console.error('Canvas context not available');
+      return null;
+    }
+    
+    // Ukuran optimal untuk foto profil (tidak terlalu besar, tidak terlalu kecil)
+    // Maksimal 500x500 untuk mengurangi ukuran upload
+    const MAX_SIZE = 500;
+    const aspectRatio = pixelCrop.width / pixelCrop.height;
+    
+    let targetWidth, targetHeight;
+    
+    if (pixelCrop.width > pixelCrop.height) {
+      targetWidth = Math.min(pixelCrop.width, MAX_SIZE);
+      targetHeight = targetWidth / aspectRatio;
+    } else {
+      targetHeight = Math.min(pixelCrop.height, MAX_SIZE);
+      targetWidth = targetHeight * aspectRatio;
+    }
+    
+    // Set canvas size to optimized size
+    canvas.width = targetWidth;
+    canvas.height = targetHeight;
+
+    // Buat canvas dengan background putih untuk menghindari masalah transparansi
+    ctx.fillStyle = '#FFFFFF';
+    ctx.fillRect(0, 0, targetWidth, targetHeight);
+    
+    // Draw cropped image dengan smooth scaling
+    ctx.imageSmoothingEnabled = true;
+    ctx.imageSmoothingQuality = 'high';
+    
+    ctx.drawImage(
+      image,
+      pixelCrop.x,
+      pixelCrop.y,
+      pixelCrop.width,
+      pixelCrop.height,
+      0,
+      0,
+      targetWidth,
+      targetHeight
+    );
+
+    // Konversi ke blob dengan format JPG untuk kompatibilitas maksimal
+    console.log('Converting cropped image to JPEG format');
+    return new Promise((resolve) => {
+      canvas.toBlob((blob) => {
+        if (!blob) {
+          console.error('Failed to create blob from canvas');
+          resolve(null);
+          return;
+        }
+        console.log(`Created JPEG blob: ${blob.size} bytes`);
+        resolve(blob);
+      }, 'image/jpeg', 0.92); // Quality 0.92 memberikan keseimbangan antara kualitas dan ukuran file
+    });
+  } catch (error) {
+    console.error('Error in getCroppedImg:', error);
     return null;
   }
-  
-  // Set canvas size to final crop size
-  canvas.width = pixelCrop.width;
-  canvas.height = pixelCrop.height;
-
-  // Draw cropped image
-  ctx.drawImage(
-    image,
-    pixelCrop.x,
-    pixelCrop.y,
-    pixelCrop.width,
-    pixelCrop.height,
-    0,
-    0,
-    pixelCrop.width,
-    pixelCrop.height
-  );
-
-  // Konversi ke blob
-  return new Promise((resolve) => {
-    canvas.toBlob((blob) => {
-      resolve(blob);
-    }, 'image/jpeg', 0.95);
-  });
 };
 
 const ImageCropper = ({ onCropComplete }) => {
