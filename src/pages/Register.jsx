@@ -1,6 +1,7 @@
 // src/pages/Register.jsx
 import { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import ImageCropper from '../components/ImageCropper';
 
 export default function Register() {
   const navigate = useNavigate();
@@ -33,15 +34,13 @@ export default function Register() {
     setFormData({...formData, [name]: value});
   };
 
-  // Handle file selection for profile photo
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    if (file && file.type.startsWith('image/')) {
+  // Handle cropped image from ImageCropper component
+  const handleCroppedImage = (file) => {
+    if (file) {
+      setCroppedImage(file);
       const reader = new FileReader();
       reader.onload = (event) => {
-        setImage(event.target.result);
-        setPreview(null); // Reset preview when new image is selected
-        setCroppedImage(null);
+        setPreview(event.target.result);
       };
       reader.readAsDataURL(file);
     }
@@ -279,96 +278,38 @@ export default function Register() {
           />
         </div>
         
-        {/* Profile Picture Upload Section - Discord Style */}
+        {/* Profile Picture Upload Section dengan ImageCropper */}
         <div className="mb-6">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="profile-upload">
+          <label className="block text-gray-700 text-sm font-bold mb-2">
             Foto Profil (Opsional)
           </label>
           
-          <div 
-            className={`flex flex-col items-center justify-center border-2 border-dashed rounded-lg p-4 mt-2 ${isDragging ? 'border-red-500 bg-red-50' : 'border-gray-300'}`}
-            onDragOver={handleDragOver}
-            onDragLeave={handleDragLeave}
-            onDrop={handleDrop}
-          >
-            <input 
-              type="file" 
-              ref={fileInputRef}
-              onChange={handleFileChange} 
-              accept="image/*" 
-              className="hidden"
-              id="profile-upload"
-              name="profile-upload"
-            />
-            
-            {!image && !preview && (
-              <div className="text-center">
-                <button 
-                  type="button"
-                  onClick={() => fileInputRef.current?.click()}
-                  className="bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold py-2 px-4 rounded-lg mb-2"
-                >
-                  Pilih Foto
-                </button>
-                <p className="text-sm text-gray-500">atau drag & drop foto di sini</p>
-              </div>
-            )}
-            
-            {image && !preview && (
-              <div className="w-full">
-                <div className="relative w-full max-w-xs mx-auto aspect-square mb-3 overflow-hidden rounded-full">
-                  <img 
-                    ref={imageRef} 
-                    src={image} 
-                    alt="Upload Preview" 
-                    className="w-full h-full object-cover"
-                    onLoad={handleCrop} // Auto-crop when image loads
-                    id="preview-image"
-                  />
-                </div>
-                <div className="flex justify-center space-x-2">
-                  <button
-                    type="button"
-                    onClick={() => fileInputRef.current?.click()}
-                    className="bg-gray-200 hover:bg-gray-300 text-gray-700 text-sm py-1 px-3 rounded"
-                  >
-                    Ganti Foto
-                  </button>
-                  <button
-                    type="button"
-                    onClick={handleCrop}
-                    className="bg-blue-500 hover:bg-blue-600 text-white text-sm py-1 px-3 rounded"
-                  >
-                    Crop Foto
-                  </button>
-                </div>
-              </div>
-            )}
-            
-            {preview && (
+          <div className="mt-2">
+            {preview ? (
               <div className="w-full text-center">
-                <div className="relative w-32 h-32 mx-auto mb-3 overflow-hidden rounded-full border-2 border-red-500">
+                <div className="relative w-32 h-32 mx-auto mb-3 overflow-hidden rounded-full border-2 border-gray-200 shadow-md">
                   <img 
                     src={preview} 
                     alt="Cropped Preview" 
                     className="w-full h-full object-cover"
-                    id="cropped-preview"
                   />
                 </div>
                 <div className="flex justify-center space-x-2">
                   <button
                     type="button"
-                    onClick={() => fileInputRef.current?.click()}
+                    onClick={() => {
+                      setPreview(null);
+                      setCroppedImage(null);
+                    }}
                     className="bg-gray-200 hover:bg-gray-300 text-gray-700 text-sm py-1 px-3 rounded"
                   >
-                    Ganti Foto
+                    Hapus Foto
                   </button>
                 </div>
               </div>
+            ) : (
+              <ImageCropper onCropComplete={handleCroppedImage} />
             )}
-            
-            {/* Hidden canvas elements for cropping */}
-            <canvas ref={canvasRef} className="hidden" id="crop-canvas"></canvas>
           </div>
         </div>
 

@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { FaCamera, FaCheckCircle, FaExclamationCircle } from 'react-icons/fa';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import ImageCropper from '../components/ImageCropper';
 
 export default function EditProfile() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [profileImage, setProfileImage] = useState(null);
+  const [profileImage, setProfileImage] = useState('');
+  const [showCropper, setShowCropper] = useState(false);
   const [formData, setFormData] = useState({
     uname: '',
     email: '',
@@ -17,6 +19,7 @@ export default function EditProfile() {
     whatsapp: '',
     instagram: '',
     password: '',
+    confirmPassword: ''
   });
   const [memberSince, setMemberSince] = useState(null);
   const [notification, setNotification] = useState({ show: false, message: '', type: '' });
@@ -79,9 +82,10 @@ export default function EditProfile() {
     fetchProfileData();
   }, [navigate]);
 
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
+  // Fungsi untuk menangani gambar yang sudah di-crop dari komponen ImageCropper
+  const handleCroppedImage = (file) => {
     if (file) {
+      // Tampilkan preview gambar yang sudah di-crop
       setProfileImage(URL.createObjectURL(file));
       
       // Upload gambar ke server
@@ -101,12 +105,22 @@ export default function EditProfile() {
           });
           
           console.log('Profile image uploaded successfully');
+          showNotification('Foto profil berhasil diperbarui', 'success');
         } catch (error) {
           console.error('Error uploading profile image:', error);
+          showNotification('Gagal mengupload foto profil', 'error');
         }
       };
       
       uploadImage();
+    }
+  };
+  
+  // Fungsi lama untuk backward compatibility
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      handleCroppedImage(file);
     }
   };
 
